@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación – Paella y Bingo Benéfico</title>
+    <style>
+        /* Importar fuentes: un título juvenil tipo cómic y una sans para el resto */
+      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Montserrat:wght@400;600&display=swap');
+
+        :root {
+            /* Paleta pastel para una estética más suave */
+            --background-color: #fdf5e6; /* beige muy claro para el fondo general */
+            --section-bg: #fffdf9;      /* blanco roto para las tarjetas */
+            --border-color: #e8cfae;     /* beige pastel para bordes y botones */
+            --text-color: #333333;      /* gris oscuro para buena legibilidad */
+            --title-color: #333333;     /* mismo color para títulos */
+            --highlight-green: #a4cfa1; /* tonos suaves para Etiopía */
+            --highlight-red: #e79a9a;   /* rojo pastel para Etiopía */
+            --highlight-yellow: #f5dfa7; /* amarillo pastel para Etiopía */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-color);
+    position: relative;
+    min-height: 100vh;
+
+    background-image: url('fondo.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* Quitamos los fondos laterales antiguos */
+body::before,
+body::after {
+    display: none;
+}
+
+        /* Contenedor de cada apartado */
+        section {
+            background: var(--section-bg);
+            border: 3px solid var(--border-color);
+            border-radius: 20px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+            padding: clamp(30px, 5vw, 50px);
+            margin: clamp(30px, 6vw, 60px) auto;
+            max-width: 900px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Línea decorativa en la parte superior de cada sección */
+        section::before {
+            content: '';
+            display: block;
+            width: 120px;
+            height: 4px;
+            background: var(--border-color);
+            margin: 0 auto 20px;
+            border-radius: 2px;
+        }
+
+    h1 {
+    margin: 0 0 1rem;
+    font-family: 'Fredoka One', cursive;
+    font-weight: normal;
+    font-size: clamp(2.4rem, 8vw, 4rem);
+    color: var(--title-color);
+}
+
+h2 {
+    margin: 0 0 1rem;
+    font-family: 'Fredoka One', cursive;
+    font-weight: normal;
+    font-size: clamp(1.8rem, 6vw, 2.8rem);
+    color: var(--title-color);
+}
+
+        /* Imagen decorativa del encabezado */
+        .header-image {
+            width: clamp(140px, 30%, 220px);
+            height: auto;
+            margin: 10px auto 15px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            object-fit: cover;
+        }
+
+        p {
+            margin: 0.5rem 0;
+            line-height: 1.6;
+        }
+
+        /* Cuenta atrás */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            font-size: clamp(2.2rem, 8vw, 3.8rem);
+            font-weight: 600;
+            color: var(--title-color);
+            margin-top: 10px;
+        }
+        .countdown-container span {
+            min-width: 50px;
+        }
+
+        /* Formulario de asistencia */
+        form {
+            display: inline-block;
+            max-width: 500px;
+            width: 100%;
+            text-align: left;
+            margin-top: 20px;
+        }
+        form label {
+            font-weight: 500;
+            color: var(--text-color);
+            display: block;
+            margin-bottom: 8px;
+        }
+        form input,
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 10px 12px;
+            margin-top: 4px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        form input:focus,
+        form select:focus,
+        form textarea:focus {
+            outline: none;
+            border-color: var(--border-color);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        form button {
+            display: block;
+            margin: 0 auto;
+            background: var(--border-color);
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            transition: background 0.3s, transform 0.1s;
+        }
+        form button:hover {
+            /* tono un poco más oscuro del beige para el efecto hover */
+            background: #d1b893;
+            transform: translateY(-3px);
+        }
+
+        /* Tabla del horario */
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .schedule-table th,
+        .schedule-table td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+        }
+        .schedule-table th {
+            background: var(--border-color);
+            color: #ffffff;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .schedule-table tr:nth-child(even) {
+            background: #f9f5eb;
+        }
+
+        /* Lista de precios con iconos juveniles */
+        .price-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+        .price-list li {
+            position: relative;
+            padding-left: 36px;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .price-list li::before {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: inline-block;
+        }
+        .price-item-paella::before { content: ''; width: 24px; height: 24px; background-image: url(); background-size: contain; background-repeat: no-repeat; }
+        .price-item-dessert::before { content: ''; width: 24px; height: 24px; background-image: url(); background-size: contain; background-repeat: no-repeat; }
+        .price-item-drink::before { content: ''; width: 24px; height: 24px; background-image: url(); background-size: contain; background-repeat: no-repeat; }
+        .price-item-bingo::before { content: ''; width: 24px; height: 24px; background-image: url(); background-size: contain; background-repeat: no-repeat; }
+        .price-item-fila0::before { content: ''; width: 24px; height: 24px; background-image: url(); background-size: contain; background-repeat: no-repeat; }
+
+        /* Iconos en la tabla de horario */
+        .schedule-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        /* Carrusel de fotos en la sección de información */
+        .carousel {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 320px;
+            margin: 20px auto 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .carousel .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        .carousel .slide.active {
+            opacity: 1;
+        }
+
+
+        /* Flechas de navegación del carrusel */
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(232, 207, 174, 0.92);
+            color: #333333;
+            border: none;
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
+            z-index: 5;
+            font-size: 1.35rem;
+            line-height: 1;
+        }
+
+        .carousel-button.prev {
+            left: 12px;
+        }
+
+        .carousel-button.next {
+            right: 12px;
+        }
+
+        .carousel-button:hover {
+            background: #d1b893;
+        }
+
+        /* Botón de calendario */
+        .add-calendar-btn {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 12px 26px;
+            background: var(--border-color);
+            color: #ffffff;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s, transform 0.1s;
+        }
+        .add-calendar-btn:hover {
+            background: #d1b893;
+            transform: translateY(-3px);
+        }
+
+        /* Botón para volver al inicio */
+        #backToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--border-color);
+            color: #ffffff;
+            border-radius: 50%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.4rem;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s, transform 0.2s;
+            z-index: 100;
+        }
+        #backToTop:hover {
+            background: #d1b893;
+            transform: translateY(-4px);
+        }
+
+        /* Apartado de destino de los fondos */
+        .fund-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .fund-image {
+            width: 40%;
+            max-width: 300px;
+            border-radius: 16px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+        .fund-text {
+            flex: 1;
+            text-align: left;
+        }
+        #destino blockquote {
+            margin: 1rem 0 0;
+            font-style: italic;
+            color: var(--text-color);
+            font-family: 'Montserrat', sans-serif;
+        }
+        #destino .quote-author {
+            display: block;
+            margin-top: 0.5rem;
+            font-family: 'Lilita One', cursive;
+            color: var(--border-color);
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: clamp(1.8rem, 8vw, 2.8rem);
+            }
+            h2 {
+                font-size: clamp(1.2rem, 6vw, 1.8rem);
+            }
+            .countdown-container {
+                font-size: clamp(1.8rem, 10vw, 2.8rem);
+            }
+            .fund-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .fund-image {
+                width: 80%;
+            }
+            .fund-text {
+                text-align: center;
+            }
+            /* Oculta el patrón lateral en pantallas pequeñas */
+            body::before,
+            body::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sección 1: Título, lugar y hora -->
+    <section id="titulo">
+        <h1>PAELLA Y BINGO BENÉFICO</h1>
+        <!-- Imagen decorativa de paella para evocar el cartel original -->
+        <h3>¡Buenas a todos!</h3>
+<p>Como cada año, volvemos a la carga con nuestro proyecto de ir a Bale Goba (Etiopía) y este año hemos pensado en haceros partícipes a todas aquellas personas que conocéis el proyecto y la ilusión con la que lo llevamos a cabo. 
+ Pues somos fieles creyentes de que toda ayuda, presencial o “telemática”, aporta.</p>
+    
+        <p><strong>Lugar:</strong> Calle San José Obrero 32, Pozuelo de Alarcón</p>
+        <p><strong>Fecha y horario:</strong> Sábado 13 de junio de 2026, 13:30–18:30&nbsp;h</p>
+        </section>
+
+   
+
+    <!-- Sección 3: Información del evento -->
+    <section id="informacion">
+        <h2>Información del evento</h2>
+        <p>
+            <strong>¡Ayúdanos a colaborar con tu las Misioneras de la Caridad de
+                <span style="color: var(--highlight-green);">E</span><span style="color: var(--highlight-yellow);">T</span><span style="color: var(--highlight-green);">I</span><span style="color: var(--highlight-yellow);">O</span><span style="color: var(--highlight-red);">PÍA</span>!</strong>
+            <br>
+          
+        </p>
+        <ul class="price-list">
+            <li class="price-item-paella"><strong>Ración + cerveza/refresco:</strong> 10&nbsp;€</li>
+            <li class="price-item-dessert"><strong>Postre + café:</strong> 3&nbsp;€</li>
+            <li class="price-item-drink"><strong>Bebida extra:</strong> 1&nbsp;€</li>
+            <li class="price-item-bingo"><strong>Cartón de bingo:</strong> 1&nbsp;€</li>
+        </ul>
+
+        <!-- Carrusel de fotos que rota cada 5 segundos -->
+        <div class="carousel">
+            <button class="carousel-button prev" type="button" aria-label="Imagen anterior">‹</button>
+            <button class="carousel-button next" type="button" aria-label="Imagen siguiente">›</button>
+            <div class="slide active" style="background-image: url('carrusel1.jpeg');"></div>
+            <div class="slide" style="background-image: url('carrusel2.jpeg');"></div>
+            <div class="slide" style="background-image: url('carrusel3.jpeg');"></div>
+            <div class="slide" style="background-image: url('carrusel4.jpeg');"></div>
+            <div class="slide" style="background-image: url('carrusel5.jpeg');"></div>
+            <div class="slide" style="background-image: url('carrusel6.jpeg');"></div>
+        </div>
+        <br></br>
+        
+          <p>Para los que no podáis acudir y queráis colaborar existe la fila 0</p> 
+          <p></p><b>¡No es cuestión de grandes cantidades, sino de buenas intenciones!</b></p>
+    </section>
+     <!-- Sección 2: Cuenta atrás -->
+    <section id="cuenta-atras">
+        <h2>Cuenta atrás</h2>
+        <div class="countdown-container" id="countdown-clock">
+            <span id="days">00</span>d
+            <span id="hours">00</span>h
+        </div>
+        <a href="#" id="addToCalendar" class="add-calendar-btn">Añadir al calendario</a>
+    </section>
+
+   <!-- Sección 4: Encuesta de asistencia -->
+<!-- Sección 4: Encuesta de asistencia -->
+<section id="encuesta">
+    <h2>Confirma tu asistencia</h2>
+    <p>Por favor, rellena el siguiente formulario para confirmar tu asistencia. Las respuestas se almacenarán en una hoja centralizada.</p>
+
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+    <form id="attendance-form"
+          method="POST"
+          action="https://script.google.com/macros/s/AKfycby_a6-sEe5u_vFDHTvVbWJZv2FinawFKhT4fOPSEg_MuYtViTxe7ALjhgcmoMTvR9NF/exec"
+          target="hidden_iframe"
+          onsubmit="mostrarMensajeEncuesta()">
+
+        <label>Nombre
+            <input type="text" name="Nombre" required>
+        </label>
+
+        <label>Apellidos
+            <input type="text" name="Apellidos" required>
+        </label>
+
+        <label>Asistencia
+            <select name="Asistencia" required>
+                <option value="Asistirá">Asistiré</option>
+                <option value="No lo sé">No lo sé todavía</option>
+                <option value="No asistirá">No asistiré</option>
+            </select>
+        </label>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <div id="response-message" style="margin-top: 15px; color: #6b5b45; font-weight: 700;"></div>
+
+    <script>
+        function mostrarMensajeEncuesta() {
+            const mensaje = document.getElementById('response-message');
+
+            mensaje.textContent = 'Enviando respuesta...';
+
+            setTimeout(function() {
+                mensaje.textContent = 'Respuesta enviada correctamente. Muchas gracias.';
+                document.getElementById('attendance-form').reset();
+            }, 1200);
+        }
+    </script>
+</section>
+
+ 
+
+    <!-- Sección 6: Destino de los fondos -->
+    <section id="destino">
+        <h2>¿A dónde va lo recaudado?</h2>
+        <div class="fund-content">
+            <img src="paelladibujo.png" alt="Ilustración de caridad" class="fund-image">
+            <div class="fund-text">
+                <p>El dinero recaudado se destinará tanto para donaciones directas como para comprar materiales para llevar allí (material escolar y médico, sillas de ruedas…).</p>
+                <blockquote>
+                   <b> Aunque parezca que lo que hacemos es una gota en el océano, éste estaría más vacío sin esa gota</b>.<br>
+                </blockquote>
+            </div>
+        </div>
+         <p>¡Muchas gracias!</p>
+    </section>
+
+    <!-- Botón para volver al inicio -->
+    <div id="backToTop">↑</div>
+
+    <script>
+        // Mostrar botón de subir al principio cuando se hace scroll
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Configuración de la cuenta atrás
+const eventDateStr = '2026-06-13T13:30:00';
+const countdownDate = new Date(eventDateStr).getTime();
+
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = countdownDate - now;
+
+    if (distance < 0) {
+        document.getElementById('countdown-clock').textContent = '¡El evento ha comenzado!';
+        clearInterval(countdownInterval);
+        return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+    document.getElementById('days').textContent = String(days).padStart(2, '0');
+    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+}
+
+const countdownInterval = setInterval(updateCountdown, 1000);
+updateCountdown();
+
+  // Lógica para la encuesta de asistencia utilizando Google Apps Script
+const form = document.getElementById('attendance-form');
+const responseMessage = document.getElementById('response-message');
+
+form.addEventListener('submit', function() {
+    responseMessage.textContent = 'Enviando tu respuesta...';
+
+    setTimeout(() => {
+        responseMessage.textContent = 'Gracias por tu respuesta.';
+        form.reset();
+    }, 900);
+});
+
+        // Lógica para el enlace "Añadir al calendario"
+        const addToCalendarLink = document.getElementById('addToCalendar');
+        addToCalendarLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            const eventTitle = document.querySelector('#titulo h1').textContent || 'Evento';
+            const startDateObj = new Date(eventDateStr);
+            // Duración de 6,5 horas para reflejar el horario del evento (13:30–20:00)
+            const endDateObj = new Date(startDateObj.getTime() + 5 * 60 * 60 * 1000);
+            const startDateICS = startDateObj.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+            const endDateICS = endDateObj.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+            const location = 'Calle San José Obrero 32, Pozuelo de Alarcón';
+            const description = 'Invitación al evento: ' + eventTitle;
+            const icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nSUMMARY:${eventTitle}\nDTSTART:${startDateICS}\nDTEND:${endDateICS}\nLOCATION:${location}\nDESCRIPTION:${description}\nEND:VEVENT\nEND:VCALENDAR`;
+            const blob = new Blob([icsContent], { type: 'text/calendar' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${eventTitle.replace(/\s+/g, '_')}.ics`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        });
+
+        // Carrusel de fotos en la sección de información
+        const slides = document.querySelectorAll('.carousel .slide');
+        const prevButton = document.querySelector('.carousel-button.prev');
+        const nextButton = document.querySelector('.carousel-button.next');
+        let currentSlideIndex = 0;
+        let slideInterval = null;
+
+        function showSlide(index) {
+            if (!slides.length) return;
+            slides[currentSlideIndex].classList.remove('active');
+            currentSlideIndex = (index + slides.length) % slides.length;
+            slides[currentSlideIndex].classList.add('active');
+        }
+
+        function startCarousel() {
+            if (slideInterval) {
+                clearInterval(slideInterval);
+            }
+            slideInterval = setInterval(() => {
+                showSlide(currentSlideIndex + 1);
+            }, 5000);
+        }
+
+        if (prevButton && nextButton && slides.length) {
+            prevButton.addEventListener('click', () => {
+                showSlide(currentSlideIndex - 1);
+                startCarousel();
+            });
+
+            nextButton.addEventListener('click', () => {
+                showSlide(currentSlideIndex + 1);
+                startCarousel();
+            });
+
+            startCarousel();
+        }
+    </script>
+</body>
+</html>
